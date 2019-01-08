@@ -1,0 +1,151 @@
+
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title twp
+    style(type='text/css').
+        body {
+        background: #F6F5F7;
+        margin: 0;
+        }
+        a {
+            text-decoration:none; 
+        }
+        .imgContainer {
+        padding: 0 16px;
+        margin-top: 14px
+        }
+        .imgContainer img {
+        width: 100%;
+        height: auto;
+        box-shadow: 0px 3px 12px rgba(21, 0, 71, 0.16)
+        }
+        .beatWord {
+        text-align: center;
+        margin: 14px;
+        margin-top: 20px
+        }
+        .fieldset {
+        padding: 0.8em;
+        margin: 0 2px;
+        border: 1px dashed#f54d23;
+        background: #fff
+        }
+        .fieldset2 {}
+        .legend {
+        background: #f54d23;
+        border: none;
+        font-size: 0.8rem;
+        line-height: 20px;
+        color: #fff;
+        padding: 0 4px;
+        top: -20px;
+        position: relative
+        }
+        .itemCopy,
+        .itemCopy2,
+        .itemCopy3 {
+        border: none;
+        font-size: 16px;
+        padding: 6px 15px;
+        background: #f60;
+        display: inline-block;
+        margin: 10px auto;
+        border-radius: 16px;
+        color: #fff
+        }
+        .itemCopy {
+            margin: 10px 2px;
+        }
+        .itemCopy3 {
+        display: none;
+        width: 140px;
+        }
+        .itemCopy2 {
+        background: #f00;
+        display: none
+        }
+        .qrbtn {
+        border: none;
+        font-size: 16px;
+        padding: 6px 15px;
+        background: #f00;
+        display: inline-block;
+        margin: 10px auto;
+        border-radius: 16px;
+        color: #fff
+        }
+        .itemWord {
+        font-size: 12px;
+        top: -10px;
+        position: relative
+        }
+        .kz-float-layer {
+        height: 0px !important
+        }
+        .kz-float-layer {
+        display: none !important
+        }
+        .copySuccess {
+            background-color: rgb(158, 210, 158); 
+            border-color: rgb(158, 210, 158)
+        }
+.beatWord
+    .fieldset
+        #copy_tip.legend &#x957F;&#x6309;&#x6846;&#x5185;&gt;&#x5168;&#x9009;&gt;&#x590D;&#x5236;&gt;&#x6253;&#x5F00;&#x624B;&#x673A;&#x638F;&#x5BF6;ApP
+        p#itemWord.itemWord
+            span#koulin #{koulingPre}#{kouling}
+    #itemCopy.itemCopy(type='button', data-clipboard-text='#{koulingPre}#{kouling}') &#x4E00;&#x952E;&#x590D;&#x5236;
+    if wangzhan
+        a(href='#{wangzhan}')
+            #qrbtn.qrbtn(type='button', data-clipboard-text='', style='')&#x66F4;&#x591A;&#x4F18;&#x60E0;
+    .fieldset.fieldset3(style='border-color: rgb(255, 0, 0); margin-top: 10px;')
+        p#memo &#x5BF9;&#x9762;&#x7684;&#x5973;&#x5B69;&#x770B;&#x8FC7;&#x6765;&#xFF0C;&#x652F;&#x4ED8;&#x5B9D;&#x9996;&#x9875;&#x641C;&#x7D22;#{alipay}&#x9886;&#x53D6;&#x5927;&#x5927;&#x5927;&#x7EA2;&#x5305;
+    #itemCopy3.itemCopy3(type='button', data-clipboard-text='#{alipay}', style='display: block;') &#x590D;&#x5236;&ldquo;#{alipay}&rdquo;
+    p(style='color: #4f4f4f; font-size: 8px;') #{xiaoweiba}
+    .fieldset.fieldset2(style='display:none; border-color: #f00;margin-top:10px;')
+        #copy_tip.legend(style='background-color: #f00;') 1212&#x75AF;&#x62A2;&#x7EA2;&#x5305;&#x4E3B;&#x4F1A;&#x573A;
+        p#itemWord2.itemWord2
+            span#koulin2
+    #itemCopy2.itemCopy2(type='button', data-clipboard-text='') &#x9886;&#x53D6;1212&#x7EA2;&#x5305;
+.imgContainer
+    img#img(src='#{picUrl}')
+#image-viewer.image-viewer
+    .view(style='height: 100%; width: 100%;')
+    .paging
+.kz-page-float-layer.kz-page-bottom(data-role='kz-page-bottom-float-layer')
+    #kz-page-ad.kz-page-ad-inner-layer
+    .kz-manage(data-role='kz-manage')
+    
+script(src='/javascripts/clipboard.min.js')
+script.
+    (function() {
+        var copy = new ClipboardJS('.itemCopy');
+        var copy3 = new ClipboardJS('.itemCopy3');
+
+        copy.on('success', function(e) {
+            var item = document.getElementById('itemCopy');
+            item.setAttribute('class', 'itemCopy copySuccess');
+            item.innerHTML = '复制成功，打开掏寳APP购买';
+            setTimeout(function() {
+                item.setAttribute('class', 'itemCopy');
+                item.innerHTML = '一键复制';
+            }, 2000)
+
+            e.clearSelection();
+        });
+
+        copy3.on('success', function(e) {
+            var item = document.getElementById('itemCopy3');
+            item.setAttribute('class', 'itemCopy3 copySuccess');
+            item.innerHTML = '复制成功';
+            setTimeout(function() {
+                item.setAttribute('class', 'itemCopy3');
+                item.innerHTML = '复制';
+            }, 2000)
+
+            e.clearSelection();
+        });
+    })()

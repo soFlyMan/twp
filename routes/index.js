@@ -18,20 +18,19 @@ router.post('/api/other/wx/tb/midpage/', function(req, res, next) {
     .then((response) => {
       if (response.ok) {
         response.json().then(data => {
-          var picUrl = data.picUrl;
+          console.log(data);
+          var picUrl = data.picUrl || data.msg;
           var route = Date.now().toString();
           db.add(reqBody.twp, route, reqBody.alipay, reqBody.more, reqBody.xiaoweiba, picUrl, function() {
             res.send({
-              route: `http://193.112.75.80:3000/twp/${route}`,
+              route: `http://localhost:3000/twp/${route}`,
               picUrl: picUrl,
             });
           })
         })
-      }
+      } 
       // 可以透過 blob(), json(), text() 轉成可用的資訊
 
-    }).then((jsonData) => {
-      console.log(jsonData);
     }).catch((err) => {
       console.log('錯誤:', err);
     });

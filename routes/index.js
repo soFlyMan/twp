@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 router.post('/api/other/wx/tb/midpage/', function(req, res, next) {
   var reqBody = req.body
   var twp = reqBody.twp
+  console.log('twp', twp)
   
   var api_url = `http://api.taokouling.com/tkl/tkljm?apikey=yyEARRKhpk&tkl=${twp}`;
   fetch(api_url, {})

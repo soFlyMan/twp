@@ -11,6 +11,8 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
+    "fullpage": "^1.4.2",
+    "fullpage.js": "^3.0.4",
     "install": "^0.12.2",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",

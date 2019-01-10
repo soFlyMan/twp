@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>淘宝联盟 京粉 京东联盟 自动转链 返利转链 机器人</title>
+    <link rel="stylesheet" href="./fullpage/fullpage.min.css">
+    <style>
+        .s1 {
+            background-color: aqua;
+        }
+        .s2 { background-color: rgb(196, 143, 62); }
+        .s3 { background-color: rgb(100, 34, 126); }
+        .s4 { background-color: rgb(150, 180, 39); }
+    </style>
+</head>
+<body>
+    <!-- <h2>MkStone QQ端 京东淘宝转链转发</h2> -->
+    <div id="fullpage">
+        <div class="section s1">1</div>
+        <div class="section s2">2</div>
+        <div class="section s3">3</div>
+        <div class="section s4">4</div>
+    </div>
+    <ul id="myMenu">
+        <li data-menuanchor="firstPage" class="active">
+            <a href="#firstPage">第一节</a>
+        </li>
+        <li data-menuanchor="secondPage">
+            <a href="#secondPage">第二节</a>
+        </li>
+        <li data-menuanchor="thirdPage">
+            <a href="#thirdPage">第三节</a>
+        </li>
+        <li data-menuanchor="fourthPage">
+            <a href="#fourthPage">第四节</a>
+        </li>
+    </ul>
+    <script src="./fullpage/fullpage.min.js"></script>
+    <script>
+        new fullpage('#fullpage', {
+            //options here
+            anchors:['firstPage', 'secondPage', 'thirdPage'],
+            autoScrolling:true,
+            scrollHorizontally: true,
+            anchors: ['firstPage', 'secondPage', 'thirdPage', 'fourthPage', 'lastPage'], 
+            menu: '#myMenu'
+        });
+    </script>
+</body>
+</html>

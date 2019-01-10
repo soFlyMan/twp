@@ -23,7 +23,7 @@ router.post('/api/other/wx/tb/midpage/', function(req, res, next) {
           var route = Date.now().toString();
           db.add(reqBody.twp, route, reqBody.alipay, reqBody.more, reqBody.xiaoweiba, picUrl, function() {
             res.send({
-              route: `http://localhost:3000/twp/${route}`,
+              route: `http://13.115.66.202:3000/twp/${route}`,
               picUrl: picUrl,
             });
           })

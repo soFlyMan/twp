@@ -218,9 +218,14 @@
         
         @media screen and (min-width: 1600px) {
             .item-wrapper ul li img {
-                height: auto;
+                height: auto!important;
+                ;
             }
             .wx-item-wrapper ul li img {
-                height: auto;
+                height: auto!important;
+                ;
+            }
+            p {
+                font-size: 16px !important;
             }
         }

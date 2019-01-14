@@ -223,4 +223,7 @@
             .wx-item-wrapper ul li img {
                 height: 360px;
             }
+            p {
+                font-size: 16px!important;
+            }
         }

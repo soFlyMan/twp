@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>余额宝体验金一键批量领取工具</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <style>
+        .pl-wrapper {
+            position: relative;
+            /* display: table-cell;
+            text-align: center;
+            vertical-align: middle; */
+            width: 100%;
+            height: 30px;
+            margin: 20px;
+        }
+        
+        #fileupload {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 120px;
+            height: 32px;
+            opacity: 0;
+            cursor: pointer;
+            transform: translate(-50%, 0);
+        }
+        
+        #qrcode {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 170px;
+            height: 32px;
+            transform: translate(-50%, 0);
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .lingqu {
+            position: absolute;
+            top: 0;
+            left: 180px;
+            /* display: table-cell; */
+        }
+        
+        .log {
+            border: 1px solid #ccc;
+        }
+        
+        .table {
+            width: 100%;
+            height: 100%;
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        textarea {
+            overflow: hidden;
+        }
+        /* button {
+            display: block;
+            margin: 0 auto;
+        } */
+        
+        #qrname,
+        #textname {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100px;
+            height: 32px;
+            line-height: 32px;
+            color: #848484;
+            text-align: left;
+        }
+        
+        #qrname {
+            transform: translate(85px, 0);
+        }
+        
+        #textname {
+            transform: translate(42px, 0);
+        }
+        
+        #textarea {
+            font-size: 12px;
+        }
+        
+        .desc {
+            color: rgb(118, 118, 118);
+            width: 100%;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table">
+        <div>
+            <p style="color:#9a8888">余额宝体验金一键批量领取工具</p>
+            <img src="./1.png" alt="" style="width: 100%;">
+        </div>
+
+        <div class="pl-wrapper">
+            <input id="qrcode" type="file" name="files[]" data-url="/qrcode" value="二维码">
+            <p id="qrname"></p>
+
+            <button type="button" class="btn btn-primary">导入你的体验金二维码</button>
+        </div>
+
+        <div class="input-group">
+            <input type="text" class="form-control" id="phone" placeholder="输入手机号码" aria-describedby="basic-addon1">
+            <button type="button" class="btn btn-default lingqu" id="lingqu">领取</button>
+        </div>
+        <!-- <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">批量导入手机号</button>、
+                <button type="button" class="btn btn-primary">导入我的二维码</button>
+        </div> -->
+        <div class="pl-wrapper">
+            <input id="fileupload" type="file" name="files[]" data-url="/text" multiple value="批量领取">
+            <button type="button" class="btn btn-primary" id="pllq">批量导入</button>
+            <p id="textname"></p>
+        </div>
+        <p class="desc">点此处批量导入↑手机号码，txt格式</p>
+
+        <div class="log">
+            <textarea disabled id="textarea" rows="4" cols="40"></textarea>
+        </div>
+    </div>
+
+    <!-- 图 导入二维码 显示路径 手机号输入框 11 批量领取 路径 上传 ”点此手机号批量导入 txt格式“ 领取按钮 日志框 {"msg":"恭喜您，领取2000元余额宝体验金"} 一条的 {"msg":"恭喜您，领取2000元余额宝体验金" 批量的 间隔时间 "msg":"恭喜您，领取2000元余额宝体验金" "msg":"恭喜您，领取2000元余额宝体验金" "msg":"恭喜您，领取2000元余额宝体验金" "msg":"恭喜您，领取2000元余额宝体验金" "msg":"恭喜您，领取2000元余额宝体验金"} -->
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/vendor/jquery.ui.widget.js"></script>
+    <script src="js/jquery.iframe-transport.js"></script>
+    <script src="js/jquery.fileupload.js"></script>
+    <script>
+        $(function() {
+            $('#lingqu').click(function() {
+                var numlist = [188, 666, 1000, 2000, 20000, 30000, 50000, 880000, 1000000, 2000000]
+                var num = Math.floor(Math.random() * 10)
+                console.log(num)
+                var text = `{ "msg" : "恭喜您，领取${numlist[num]}元余额宝体验金" }\n`
+                    // $('#textarea').text(text)
+                var phone = $('#phone').val()
+                var reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/
+                console.log('123', phone)
+                if (!reg.test(phone)) {
+                    alert('手机号格式错误！')
+                    return false
+                }
+                $('#lingqu').attr('disabled', 'disabled')
+                $('#lingqu').text('领取中...')
+                $.ajax({
+                    url: '/phone',
+                    method: 'POST',
+                    body: {
+                        phone: phone
+                    },
+                    success: function() {
+                        $('#lingqu').attr('disabled', false)
+                        $('#lingqu').text('领取')
+                        $('#textarea').text(text)
+
+                    }
+                })
+            })
+
+            $('#fileupload').fileupload({
+                /* ... */
+                progressall: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    console.log('p', data)
+                    $('#progress .bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                },
+                done: function(e, data) {
+                    // $.each(data.result.files, function(index, file) {
+                    //     $('<p/>').text(file.name).appendTo(document.body);
+                    // });
+                    $('#textname').text(data.files[0].name)
+                    var numlist = [188, 666, 1000, 2000, 20000, 30000, 50000, 880000, 1000000, 2000000]
+                    var str = ''
+                    var timer = setInterval(function() {
+                        var num = Math.floor(Math.random() * 10)
+                        var text = `\n{ "msg" : "恭喜您，领取${numlist[num]}元余额宝体验金" }`
+                        str = str + text
+                        $('#textarea').text(str)
+                        $("#textarea").scrollTop(500000)
+                    }, 2000)
+                }
+            });
+
+            $('#qrcode').fileupload({
+                /* ... */
+                progressall: function(e, data) {
+                    console.log(data)
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    console.log('p', progress)
+                    $('#progress .bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                },
+                done: function(e, data) {
+                    $('#qrname').text(data.files[0].name)
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
